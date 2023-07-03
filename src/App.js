@@ -1,31 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { Button } from './button';
+import { Todos } from './todos';
+import { Menu } from './menu';
 
-class App extends React.Component {
-  state = {
-    count: 0,
+function App(){
+  const [todos, setNewTodo] = useState([])
+
+  function addToDo(title) {
+    if(title === "") return
+
+    setNewTodo(currentTodos => {
+      return [
+        ...currentTodos,
+        {id: crypto.randomUUID(), title}
+      ]
+    })
   }
 
-  add = () => {
-    this.setState({count: this.state.count += 1})
-  }
+  console.log('App component rerendered')
 
-  minus = () => {
-    this.setState({count: this.state.count -= 1})
-  }
-  
-  render() {
-    
-      
-    return (
-      <>
-        <h1>counter: {this.state.count}</h1>
-        <Button text='Dodaj' onClick={this.add} />
-        <Button text='Odejmij' onClick={this.minus} />
-      </>
-    );
-  }
+  return (
+    <div className='m-4'>
+      <p className='text-4xl'>Todos</p>
+      <Menu onClick={addToDo} />
+      <Todos todos={todos}/>
+    </div>
+  );
 }
 
 export default App;
