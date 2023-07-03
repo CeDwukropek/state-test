@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Button } from './button';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    count: 0,
+  }
+
+  add = () => {
+    this.setState({count: this.state.count += 1})
+  }
+
+  minus = () => {
+    this.setState({count: this.state.count -= 1})
+  }
+  
+  render() {
+    
+      
+    return (
+      <>
+        <h1>counter: {this.state.count}</h1>
+        <Button text='Dodaj' onClick={this.add} />
+        <Button text='Odejmij' onClick={this.minus} />
+      </>
+    );
+  }
 }
 
 export default App;
